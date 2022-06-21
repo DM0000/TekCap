@@ -12,7 +12,7 @@
 	<artifactId>capstone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>capstone</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Capstone for TekSystems Bootcamp</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -55,7 +55,7 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
-		</dependency>
+		</dependency> 
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
 			<artifactId>mariadb-java-client</artifactId>
@@ -71,7 +71,28 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+				<dependency>
+  <groupId>commons-beanutils</groupId>
+  <artifactId>commons-beanutils</artifactId>
+  <version>1.9.3</version>
+</dependency>
+
+<!-- bootstrap and jquery-->
+<dependency>
+  <groupId>org.webjars</groupId>
+  <artifactId>bootstrap</artifactId>
+  <version>3.3.7</version>
+</dependency>
+<dependency>
+  <groupId>org.webjars</groupId>
+  <artifactId>jquery</artifactId>
+  <version>3.2.1</version>
+</dependency>
+	
 	</dependencies>
+	
+	
 
 	<build>
 		<plugins>
