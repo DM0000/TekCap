@@ -66,10 +66,10 @@ public class MainController {
 	@GetMapping("/list/{name}")
 	public String addItem(@PathVariable("name") String name, 
 			RedirectAttributes redirectAttributes) {
-		System.out.println(name);
+		System.out.println(name+" added");
 		itemServiceImpl.addQuantity(name);
-				redirectAttributes.addFlashAttribute("usermessage",
-				"You successfully added " + name + "!");
+				redirectAttributes.addFlashAttribute("message",
+				 name + " added!");
 
 		return "redirect:/list";
 	}
@@ -77,10 +77,10 @@ public class MainController {
 	@GetMapping("/list1/{name}")
 	public String removeItem(@PathVariable("name") String name, 
 			RedirectAttributes redirectAttributes) {
-		System.out.println(name);
+		System.out.println(name+" removed");
 		itemServiceImpl.lowerQuantity(name);
-				redirectAttributes.addFlashAttribute("usermessage",
-				"You successfully added " + name + "!");
+				redirectAttributes.addFlashAttribute("message",
+				 name + " removed!");
 
 		return "redirect:/list";
 	}

@@ -1,6 +1,5 @@
 package com.example.capstone.service;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +49,8 @@ public class ItemServiceImpl implements ItemService{
 			
 			
 	}
+			
+			
 
        public Optional <ItemEntity> getById(Integer id) {
     	   return itemRepo.findById(id);
