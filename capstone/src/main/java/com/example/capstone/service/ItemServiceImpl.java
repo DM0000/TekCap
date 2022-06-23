@@ -59,5 +59,15 @@ public class ItemServiceImpl implements ItemService{
 	public  List<ItemEntity> findByMoreThanZero(){
 		return itemRepo.findByQuantityGreaterThan(0);
 	}
+	
+	
+	public void resetItems() {
+		 List<ItemEntity> items=itemRepo.findByQuantityGreaterThan(0);
+		 for(ItemEntity item:items) {
+			 item.setQuantity(0);
+			 itemRepo.save(item);
+		 }
+		
+	}
 
 }

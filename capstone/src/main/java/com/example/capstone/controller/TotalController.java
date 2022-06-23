@@ -51,15 +51,15 @@ public class TotalController {
 		List<StoreEntity> stores = storeServiceImpl.findAllStores();
 		
 		
-		HashMap<String, Double>storeTotal=new HashMap<String, Double>();
+		HashMap<String, String>storeTotal=new HashMap<String, String>();
 		storeTotal.clear();
 		Double sum=0.;
 		
 		for (StoreEntity store:stores) {
 		for(ItemEntity item: items) {
 			if(store.getInventory().contains(item)) {
-				sum=sum+item.getPrice();
-				storeTotal.put(store.getName(), sum);
+				sum=sum+(item.getPrice()*item.getQuantity());
+				storeTotal.put(store.getName(),"$ "+sum.toString());
 			}
 		}
 		}
@@ -85,8 +85,12 @@ public class TotalController {
 			System.out.println("first"+missingItems.toString());
 		}
 		System.out.println(missingItems.toString());
+		if(!missingItems.isEmpty()) {
 		redirectAttributes.addFlashAttribute("message",
-				"Missing "+(missingItems.size()+1) +" items, they are "+missingItems.toString());
+				"Missing "+(missingItems.size()) +" items, they are "+missingItems.toString());
+		}else {	redirectAttributes.addFlashAttribute("message",
+				"No Items Missing");
+		}
 		return "redirect:/total";
 	}
 	
@@ -107,31 +111,33 @@ public class TotalController {
 //		return sum;
 //		
 //	}
-	@PostMapping("/")
-	public String recheckTotal(RedirectAttributes redirectAttributes) {
-	List<ItemEntity> items = itemServiceImpl.findByMoreThanZero();
-	List<StoreEntity> stores = storeServiceImpl.findAllStores();
+	
+	//trying to make storeTotal update, it  now works
+//	@PostMapping("/")
+//	public String recheckTotal(RedirectAttributes redirectAttributes) {
+//	List<ItemEntity> items = itemServiceImpl.findByMoreThanZero();
+//	List<StoreEntity> stores = storeServiceImpl.findAllStores();
+//	
+//	
+//	HashMap<String, Double>storeTotal=new HashMap<String, Double>();
+//	storeTotal.clear();
+//	Double sum=0.;
+//	
+//	for (StoreEntity store:stores) {
+//	for(ItemEntity item: items) {
+//		if(store.getInventory().contains(item)) {
+//			sum=sum+item.getPrice();
+//			storeTotal.put(store.getName(), sum);
+//		}
+//		
+//	}
+//	}
+//	System.out.println("redirect"+storeTotal.toString());
+//	redirectAttributes.addAttribute("storetotal", storeTotal);
+//
+//	return "redirect:/total";
+//}
 	
 	
-	HashMap<String, Double>storeTotal=new HashMap<String, Double>();
-	storeTotal.clear();
-	Double sum=0.;
-	
-	for (StoreEntity store:stores) {
-	for(ItemEntity item: items) {
-		if(store.getInventory().contains(item)) {
-			sum=sum+item.getPrice();
-			storeTotal.put(store.getName(), sum);
-		}
-		
-	}
-	}
-	System.out.println("redirect"+storeTotal.toString());
-	redirectAttributes.addAttribute("storetotal", storeTotal);
 
-	return "redirect:/total";
-	
-	
-	
-}
 }

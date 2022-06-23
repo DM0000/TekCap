@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet" type="text/css"
+  th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
+<link rel="stylesheet" href="css/about.css">
+<title>About</title>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+       <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand">StoreSelector</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a th:href="@{/}">Home</a></li>
+      <li><a th:href="@{/list}">Your List</a></li>
+      <li><a th:href="@{/total}">Compare</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a th:href="@{/registration}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <div class="align-middle text-center w-75" >
+     <p>	The StoreChecker was created days ago to help people find the right place to shop for the
+      items they want. Our dedicated staff of one has worked tirelessly in an attempt to ensure functionality.<br>
+      As a result accuracy has suffered and all items,stores,prices,etc are completely made up and we discourage
+     anyone from making life decisions based on them.
+      	</p>
+     </div>
+
+</body>
+</html>

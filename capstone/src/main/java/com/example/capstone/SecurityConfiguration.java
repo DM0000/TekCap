@@ -23,19 +23,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		http
 			.authorizeRequests()
+		
 			.antMatchers(
 					"/registration**",
-					"/list**",
+					"/",
+					"/about",
 					"/js/**",
 					"/css/**",
 					"/img/**",
-					"/webjars/**",
-					"/total/**"
+					"/webjars/**"
+					
 					).permitAll()
 	//	trying to check permissions			 .antMatchers("/list**","/total").hasRole("User")
 					.anyRequest().authenticated()
 					.and()
-						.formLogin()
+					.formLogin()
 						.loginPage("/login")
 						//changed so would use emails
 						.usernameParameter("email")
