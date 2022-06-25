@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.capstone.entity.StoreEntity;
 
 @Repository
-public interface StoreRepository extends JpaRepository<StoreEntity, Integer> {
+public interface StoreRepository extends JpaRepository<StoreEntity, Long> {
 	
 	Optional<StoreEntity> findByName(String name);
 }

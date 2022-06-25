@@ -1,17 +1,18 @@
 package com.example.capstone.repository;
 
-import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.capstone.entity.ItemEntity;
 
 @Repository
-public interface ItemRepository extends JpaRepository<ItemEntity, Integer> {
+public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
- List<ItemEntity> findByName(String name);
+ Optional<ItemEntity> findByName(String name);
 	
-	List<ItemEntity> findByQuantityGreaterThan(Integer num);
+	
 	
 	
 	

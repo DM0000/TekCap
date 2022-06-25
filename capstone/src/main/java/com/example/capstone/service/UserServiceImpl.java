@@ -102,6 +102,7 @@ package com.example.capstone.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +115,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.capstone.controller.UserRegistrationDto;
+import com.example.capstone.entity.CartEntity;
+import com.example.capstone.entity.CartItem;
+import com.example.capstone.entity.ItemEntity;
 import com.example.capstone.entity.Role;
 import com.example.capstone.entity.UserEntity;
 import com.example.capstone.repository.UserRepository;
@@ -143,6 +147,48 @@ public class UserServiceImpl implements UserService {
        return userRepository.save(userT);
    }
 
+   public void saveUser(UserEntity user) {
+	   userRepository.save(user);
+   }
+   
+   	
+//   public void addToCart(ItemEntity item, String email) {
+//	  UserEntity userT= userRepository.findByEmail(email);
+//	      CartEntity userCart = userT.getCart();
+//	      
+//	        CartItem cItem=new CartItem();
+//	     cItem.setItem(item);
+//	    if(userCart.getItems()==null) {
+//	    	userCart=new CartEntity();
+//	    	userT.setCart(userCart);
+//	    	userRepository.save(userT);
+//	    }
+//		if(userCart.getItems().contains(cItem)) {
+//			cItem.setQuantity(cItem.getQuantity()+1);
+//			userRepository.save(userT);
+//		}
+//		else {
+//			
+//			userCart.getItems().add(cItem);
+//			userRepository.save(userT);
+//		}
+//   }
+		
+		public void removeFromCart(ItemEntity item, String email) {
+			  UserEntity userT= userRepository.findByEmail(email);
+			      CartEntity userCart = userT.getCart();
+			
+					   for(CartItem cartItem:userCart.getItems()) {
+						   if(cartItem.getItem()==item) {
+							   cartItem.setQuantity(cartItem.getQuantity()-1);
+							   userRepository.save(userT);
+						   }
+					   }
+			
+   }
+   
+   
+   
    @Override
    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
        UserEntity user =userRepository.findByEmail(email);

@@ -54,11 +54,11 @@
 			<tr th:each="item : ${items}">
 
 				<td class="align-middle" th:text="${item.name}"></td>
-				<td class="align-middle" th:text="${item.price}"></td>
-				<td class="align-middle" th:text="${item.quantity}"></td>
+<!-- 				<td class="align-middle" th:text="${item.price}"></td> -->
+<!-- 				<td class="align-middle" th:text="${item.quantity}"></td> -->
 				<td class="align-middle text-center"><a
-					class="btn btn-secondary" th:href="'/list/' + ${item.name}">add</a>
-					<a class="btn btn-secondary" th:href="'/list1/' + ${item.name}">remove</a></td>
+					class="btn btn-secondary" th:href="'/list/' + ${item.id}">add</a>
+					<a class="btn btn-secondary" th:href="'/list1/' + ${item.id}">remove</a></td>
 			</tr>
 		</table>
 	</form>

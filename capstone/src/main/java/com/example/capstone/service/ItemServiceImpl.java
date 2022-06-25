@@ -22,52 +22,56 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepo.findAll();
 	}
 		
+	
+	public Optional<ItemEntity> findById(Long id) {
+		return itemRepo.findById(id);
+	}
 	//trying by id
 //	public void addQuantity(Integer id) {
 //		ItemEntity item= getById(id).get();
 //		item.setQuantity(item.getQuantity()+1);
 //}
 	
-	
-		
-		public void addQuantity(String name) {
-			List<ItemEntity> items=itemRepo.findByName(name);
-			for (ItemEntity x:items) {
-				x.setQuantity(x.getQuantity()+1);
-				itemRepo.save(x);
-			}
-		}
-		
-			public void lowerQuantity(String name) {
-				List<ItemEntity> items=itemRepo.findByName(name);
-				for (ItemEntity x:items) {
-					if(x.getQuantity()>0) {
-					x.setQuantity(x.getQuantity()-1);
-					itemRepo.save(x);
-					}
-				}
+//	
+//		
+//		public void addQuantity(String name) {
+//			Optional<ItemEntity> items=itemRepo.findByName(name);
+//			for (ItemEntity x:items) {
+//				x.setQuantity(x.getQuantity()+1);
+//				itemRepo.save(x);
+//			}
+//		}
+//		
+//			public void lowerQuantity(String name) {
+//				List<ItemEntity> items=itemRepo.findByName(name);
+//				for (ItemEntity x:items) {
+//					if(x.getQuantity()>0) {
+//					x.setQuantity(x.getQuantity()-1);
+//					itemRepo.save(x);
+//					}
+//				}
+//			
 			
-			
-	}
-			
-			
-
-       public Optional <ItemEntity> getById(Integer id) {
-    	   return itemRepo.findById(id);
-       }
-	
-	public  List<ItemEntity> findByMoreThanZero(){
-		return itemRepo.findByQuantityGreaterThan(0);
-	}
-	
-	
-	public void resetItems() {
-		 List<ItemEntity> items=itemRepo.findByQuantityGreaterThan(0);
-		 for(ItemEntity item:items) {
-			 item.setQuantity(0);
-			 itemRepo.save(item);
-		 }
-		
-	}
+//	}
+//			
+//			
+//
+//       public Optional <ItemEntity> getById(Integer id) {
+//    	   return itemRepo.findById(id);
+//       }
+//	
+//	public  List<ItemEntity> findByMoreThanZero(){
+//		return itemRepo.findByQuantityGreaterThan(0);
+//	}
+//	
+//	
+//	public void resetItems() {
+//		 List<ItemEntity> items=itemRepo.findByQuantityGreaterThan(0);
+//		 for(ItemEntity item:items) {
+//			 item.setQuantity(0);
+//			 itemRepo.save(item);
+//		 }
+//		
+//	}
 
 }

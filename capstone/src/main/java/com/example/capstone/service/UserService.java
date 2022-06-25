@@ -10,7 +10,7 @@ public interface UserService  extends UserDetailsService{
 	UserEntity save(UserRegistrationDto registration);
 
 
-	   
+	  
 	
 	   
 

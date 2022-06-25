@@ -1,6 +1,8 @@
 package com.example.capstone.entity;
 
 import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
@@ -22,13 +26,19 @@ public class UserEntity {
 
 	private String name;
 	@Email
+	
 	private String email;
+
+	@OneToOne
+	private CartEntity cart;
+	
 	private String password;
 
 	@ManyToMany // (targetEntity = Role.class)
 	(targetEntity = Role.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Collection<Role> roles;
 
+	
 	public UserEntity() {
 	}
 
@@ -69,6 +79,19 @@ public class UserEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	
+	
+
+
+
+	public CartEntity getCart() {
+		return cart;
+	}
+
+	public void setCart(CartEntity cart) {
+		this.cart = cart;
 	}
 
 	public Collection<Role> getRoles() {

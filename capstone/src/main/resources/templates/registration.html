@@ -58,7 +58,7 @@
 
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('email')}? 'has-error':''">
-						<label for="email" class="control-label">E-mail</label> <input
+						<label for="email" class="control-label">Email</label> <input
 							id="email" class="form-control" th:field="*{email}" />
 						<p class="error-message text-danger"
 							th:each="error : ${#fields.errors('email')}" th:text="${error}">Validation
@@ -67,7 +67,7 @@
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('confirmEmail')}? 'has-error':''">
 						<label for="confirmEmail" class="control-label">Confirm
-							e-mail</label> <input id="confirmEmail" class="form-control"
+							Email</label> <input id="confirmEmail" class="form-control"
 							th:field="*{confirmEmail}" />
 						<p class="error-message text-danger"
 							th:each="error : ${#fields.errors('confirmEmail')}"
@@ -80,26 +80,27 @@
 							th:field="*{password}" />
 						<p class="error-message text-danger"
 							th:each="error : ${#fields.errors('password')}"
-							th:text="${error}">Validation error</p>
+							th:text="${error}">Validation Error</p>
 					</div>
 					<div class="form-group"
 						th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
 						<label for="confirmPassword" class="control-label">Confirm
-							password</label> <input id="confirmPassword" class="form-control"
+							Password</label> <input id="confirmPassword" class="form-control"
 							type="password" th:field="*{confirmPassword}" />
 						<p class="error-message text-danger"
 							th:each="error : ${#fields.errors('confirmPassword')}"
-							th:text="${error}">Validation error</p>
+							th:text="${error}">Validation Error</p>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-success">Register</button>
 						<span>Already registered? <a href="/" th:href="@{/login}">Login
 								here</a></span>
 					</div>
+					</form>
 			</div>
 
 
-			</form>
+			
 		</div>
 	</div>
 

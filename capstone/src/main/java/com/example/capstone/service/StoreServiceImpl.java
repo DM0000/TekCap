@@ -15,7 +15,7 @@ public class StoreServiceImpl implements StoreService{
 	@Autowired
 	StoreRepository storeRepo;
 	
-public Optional<StoreEntity> findById(Integer id) {
+public Optional<StoreEntity> findById(Long id) {
 	return storeRepo.findById(id);
 }
 	
