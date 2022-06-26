@@ -17,4 +17,16 @@ public class CartItemServiceImpl {
 		}
 		
 		
+		public void add(CartItem cItem) {
+			cItem.setQuantity(cItem.getQuantity()+1);
+			cartItemRepository.save(cItem);
+		}
+		
+		
+		public void remove(CartItem cItem) {
+			cItem.setQuantity(cItem.getQuantity()-1);
+			cartItemRepository.save(cItem);
+		}
+		
+		
 }

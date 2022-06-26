@@ -1,28 +1,25 @@
 package com.example.capstone.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class CartItem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	private Integer quantity=0;
-	
-	@ManyToOne
+
+	private Integer quantity = 0;
+
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private ItemEntity item;
 
-	
-	
-	
-	
-	
 	public CartItem() {
 	}
 
@@ -54,6 +51,4 @@ public class CartItem {
 		this.item = item;
 	}
 
-	
-	
 }
