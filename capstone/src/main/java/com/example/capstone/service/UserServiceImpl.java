@@ -122,69 +122,47 @@ import com.example.capstone.entity.Role;
 import com.example.capstone.entity.UserEntity;
 import com.example.capstone.repository.UserRepository;
 
-
-
 @Service
 public class UserServiceImpl implements UserService {
 
-   @Autowired
-   private UserRepository userRepository;
-  
-   @Lazy
-   @Autowired
-   private BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	private UserRepository userRepository;
 
-   public UserEntity findByEmail(String email){
-       return userRepository.findByEmail(email);
-   }
+	@Lazy
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
-   public UserEntity save(UserRegistrationDto registration){
-       UserEntity userT = new UserEntity();
-       userT.setName(registration.getName());
-       userT.setEmail(registration.getEmail());
-       userT.setPassword(passwordEncoder.encode(registration.getPassword()));
-       userT.setRoles(Arrays.asList(new Role("USER")));
-       return userRepository.save(userT);
-   }
+	public UserEntity findByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
 
-   public void saveUser(UserEntity user) {
-	   userRepository.save(user);
-   }
-   
-   
-		
-		public void removeFromCart(ItemEntity item, String email) {
-			  UserEntity userT= userRepository.findByEmail(email);
-			      CartEntity userCart = userT.getCart();
-			
-					   for(CartItem cartItem:userCart.getItems()) {
-						   if(cartItem.getItem()==item) {
-							   cartItem.setQuantity(cartItem.getQuantity()-1);
-							   userRepository.save(userT);
-						   }
-					   }
-			
-   }
-   
-   
-   
-   @Override
-   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-       UserEntity user =userRepository.findByEmail(email);
-       if (user == null){
-    	   System.out.println(userRepository.findByEmail(email));
-    	
-           throw new UsernameNotFoundException("Invalid email or password.");
-       }
-       System.out.println(userRepository.findByEmail(email));
-       return new org.springframework.security.core.userdetails.User(user.getEmail(),
-               user.getPassword(),
-               mapRolesToAuthorities(user.getRoles()));
-   }
+	public UserEntity save(UserRegistrationDto registration) {
+		UserEntity userT = new UserEntity();
+		userT.setName(registration.getName());
+		userT.setEmail(registration.getEmail());
+		userT.setPassword(passwordEncoder.encode(registration.getPassword()));
+		userT.setRoles(Arrays.asList(new Role("USER")));
+		return userRepository.save(userT);
+	}
 
-   private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-       return roles.stream()
-               .map(role -> new SimpleGrantedAuthority(role.getName()))
-               .collect(Collectors.toList());
-   }
+	public void saveUser(UserEntity user) {
+		userRepository.save(user);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		UserEntity user = userRepository.findByEmail(email);
+		if (user == null) {
+			System.out.println(userRepository.findByEmail(email));
+
+			throw new UsernameNotFoundException("Invalid email or password.");
+		}
+		System.out.println(userRepository.findByEmail(email));
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+				mapRolesToAuthorities(user.getRoles()));
+	}
+
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+	}
 }

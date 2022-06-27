@@ -2,7 +2,9 @@ package com.example.capstone.controller;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.example.capstone.FieldMatch;
 
@@ -18,11 +20,13 @@ import com.example.capstone.FieldMatch;
 public class UserRegistrationDto {
 
     @NotEmpty
+    @Size(max=255)
     private String name;
 
 
 
 	@NotEmpty
+	@Size(min=6,max=200)
     private String password;
 
     @NotEmpty
@@ -30,6 +34,7 @@ public class UserRegistrationDto {
 
     @Email
     @NotEmpty
+    @Size(min=8, max=255)
     private String email;
 
     @Email

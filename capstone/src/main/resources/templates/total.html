@@ -10,7 +10,7 @@
 <title>List Display</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
-<link rel="stylesheet" href="css/list.css"/>
+<link rel="stylesheet" href="css/total.css"/>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -35,24 +35,25 @@
 	<br>
 
 
-		<h2 class="text-center">Compare and Save</h2>
+		<h1 class="text-center">Compare and Save</h1>
 <br>
 <br>
 		<div th:if="${#lists.isEmpty(items)}">
 			<h3 class="text-center align-middle">Your List Is Empty</h3>
 		</div>
-		<div th:each="item : ${items}" >
-			<div class="col-md-4 align-middle text-center"> 
-			<div class="btn btn-info" th:text="${item.name}"><div>
+		<div th:each="item : ${citems}" class="itemlist" >
+			<div class="col-md-2 align-middle text-center item"> 
+			<div class="btn btn-info" th:text="${item.toString}"><div>
 			</div>
 			</div>
 		</div>
 		</div>
+<br/>
+<br/>
+<br/>
 
 
-
-
-		<table class="table  table-bordered ">
+		<table class="table table-bordered tablemargin">
 			<tr>
 
 				<th class="align-middle text-center" >Store Name</th>
@@ -67,13 +68,18 @@
 				<td class="align-middle text-center" th:text="${store.value}"></td>
 				<td class="align-middle text-center"><a class="btn btn-info"
 					th:href="'/invchk/' + ${store.key}">What's Missing?</a></td>
-				<!--     <td class="align-middle"  th:text="${@total(store.id)}"></td>  -->
 
 			</tr>
 		</table>
 	
-	<p th:if="${message}" th:text="${message}"
-		class="alert alert-success text-center"></p>
+	<br/>
+	<br/>
+	<br/>
+	<div>
+	<p  th:if="${message}" th:text="${message}"
+		class=" alert  alert-success text-center"></p>
+		
+		</div>
 
 
 

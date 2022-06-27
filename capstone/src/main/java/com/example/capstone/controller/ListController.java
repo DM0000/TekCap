@@ -41,7 +41,7 @@ public class ListController {
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public String getItems(Model model, Authentication authentication) {
 		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
-
+      System.out.println(userT.getName()+" is checking cart");
 		if (userT.getCart() == null) {
 			CartEntity cart = new CartEntity();
 			userT.setCart(cart);
@@ -56,13 +56,10 @@ public class ListController {
 			if (allCartItems.contains(item)) {
 				allCartItems.add(item);
 			}
-
 		}
 
 		model.addAttribute("items", items);
 		model.addAttribute("cItems", cItems);
-//		model.addAttribute("userInfo", new UserEntity());
-//		model.addAttribute("cItems", cItems);
 		return "list";
 	}
 
@@ -90,7 +87,7 @@ public class ListController {
 			cartItemServiceImpl.save(tempCartItem);
 		}
 
-		System.out.println(item.getName() + " added");
+		System.out.println(item.getName() + " added to a cart");
 		redirectAttributes.addFlashAttribute("message", item.getName() + " added!");
 		return "redirect:/list";
 	}
@@ -102,31 +99,22 @@ public class ListController {
 		ItemEntity rItem = itemServiceImpl.findById(id).orElseThrow();
 		CartEntity userCart = userT.getCart();
 	
-		System.err.println("tried to remove");
-		
-	
+		System.err.println("someone tried to removed "+rItem.getName());
 		CartItem tempCartItem=cartServiceImpl.findCartItem(userCart, rItem);
 	
 		
-			System.err.println("usercart" + userCart);
-			System.out.println("usercart's list" + userCart.getItems());
+		
 			if (!userCart.getItems().contains(tempCartItem)|| !userCart.getItems().contains(tempCartItem)) {
 				redirectAttributes.addFlashAttribute("message", rItem.getName()+ " Are Not In Cart");
 			} else {
-				System.err.println("first" + tempCartItem.getItem().getName());
+			
 				cartItemServiceImpl.remove(tempCartItem);
-				System.err.println("second" + tempCartItem.getItem().getName());
+				System.out.println( tempCartItem.getItem().getName()+" removed from cart");
 				cartServiceImpl.removeItemChk(userCart, tempCartItem);
-				
-
 				redirectAttributes.addFlashAttribute("message",rItem.getName()+ " removed!");
 
 			}
-
-		
-
 	return"redirect:/list";
-
 	}
 
 	@GetMapping("/reset")

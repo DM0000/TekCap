@@ -51,4 +51,9 @@ public class CartItem {
 		this.item = item;
 	}
 
+	@Override
+	public String toString() {
+		return  item.getName()+": "+quantity;
+	}
+
 }

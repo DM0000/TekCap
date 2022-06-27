@@ -11,7 +11,7 @@ public class ItemEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 	private String name;
-	private String picture;
+	
 
 	public ItemEntity() {
 	}
@@ -32,13 +32,6 @@ public class ItemEntity {
 		this.name = name;
 	}
 
-	public String getPicture() {
-		return picture;
-	}
-
-	public void setPicture(String picture) {
-		this.picture = picture;
-	}
 
 	@Override
 	public String toString() {

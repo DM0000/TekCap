@@ -15,7 +15,7 @@ import com.example.capstone.repository.StoreInvRepository;
 import com.example.capstone.repository.StoreRepository;
 
 @Service
-public class StoreInvServiceImpl implements StoreService {
+public class StoreInvServiceImpl implements StoreInvService {
 
 	@Autowired
 	StoreInvRepository storeInvRepository;
@@ -75,7 +75,7 @@ public class StoreInvServiceImpl implements StoreService {
 					if (cItem.getItem() == sItem.getItem()) {
 						sum = sum + sItem.getPrice() * cItem.getQuantity();
 
-						storesTotal.put(key,String.format("$ %.2f", sum));
+						storesTotal.put(key, String.format("$ %.2f", sum));
 					}
 
 				}

@@ -9,9 +9,7 @@ import com.example.capstone.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	
-	
-	//	Optional<UserEntity> findById(Integer NUM);
-//	 UserEntity findByEmail(String email);
+
 	
 		UserEntity findByEmail(String Email);
 }

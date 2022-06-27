@@ -39,18 +39,24 @@
 	<div class="container">
 		<div class="col-md-6">
 			<h3 class="align-middle text-center">Available Items</h3>
-			<table class="table table-bordered ">
+			<table class="table table-primary table-bordered">
 				<tr class="ctitle">
 					<th class="ctitle">Products</th>
-					<th class="align-middle text-center ctitle">Actions</th>
+					<th class="align-middle text-center ">Actions</th>
 				</tr>
 				<tr th:if="${#lists.isEmpty(items)}">
 					<td class="text-center" colspan="7">No Items found</td>
 				</tr>
+				<tr th:if="${#lists.isEmpty(cItems)}">
 				<tr th:each="item : ${items}">
 
 					<td class="align-middle" th:text="${item.name}"></td>
-
+<!-- 					<td> -->
+<!-- 					     <div class="align-middle text-center"  th:each="c: ${cItems}" th:if="${c.item==item}"> -->
+<!-- 							<span  th:text="${c.quantity}"></span> -->
+<!-- 					     </div> -->
+					
+<!-- 					</td> -->
 					<td class="align-middle text-center"><a
 						class="btn btn-success" th:href="'/list/' + ${item.id}">add</a> <a
 						class="btn btn-warning" th:href="'/list1/' + ${item.id}">remove</a></td>
@@ -58,15 +64,15 @@
 			</table>
 		</div>
 
-		
+
 		<div class="col-md-6">
 			<h3 class="align-middle text-center">Your Cart</h3>
 			<table class="table table-bordered ">
 				<tr>
 
 					<th class="align-middle text-center ctitle">Products</th>
+					<th class="align-middle text-center ctitle ">Quantity</th>
 
-					<th class="align-middle text-center ctitle">Quantity</th>
 				</tr>
 				<tr th:if="${#lists.isEmpty(cItems)}">
 					<td class="text-center" colspan="7">No Items found</td>
@@ -82,6 +88,6 @@
 		<a th:href="@{/total}" class="btn btn-primary ">Compare</a> <a
 			th:href="@{/reset}" class="btn btn-danger ">Clear List</a>
 	</div>
-	 <script src="js/list.js"></script>
+	<script src="js/list.js"></script>
 </body>
 </html>

@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -23,7 +25,8 @@ public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
-
+	
+		
 	private String name;
 	@Email
 	
@@ -31,6 +34,7 @@ public class UserEntity {
 
 	@OneToOne(orphanRemoval = true,cascade = CascadeType.REMOVE)
 	private CartEntity cart;
+	
 	
 	private String password;
 
@@ -82,10 +86,6 @@ public class UserEntity {
 	}
 
 	
-	
-
-
-
 	public CartEntity getCart() {
 		return cart;
 	}

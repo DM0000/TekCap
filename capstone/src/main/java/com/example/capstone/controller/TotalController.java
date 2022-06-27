@@ -45,7 +45,7 @@ public class TotalController {
 	CartServiceImpl cartServiceImpl;
 
 	@RequestMapping(path = "/total", method = RequestMethod.GET)
-	
+
 	public String getItems(Model model, Authentication authentication) {
 		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
 		HashMap<String, String> storeTotal = storeInvServiceImpl.storeTotal(userT.getCart());
@@ -55,6 +55,7 @@ public class TotalController {
 		System.out.println(storeTotal.toString());
 		model.addAttribute("storetotal", storeTotal);
 		model.addAttribute("items", items);
+		model.addAttribute("citems",userCart);
 
 		return "/total";
 	}
@@ -72,17 +73,13 @@ public class TotalController {
 		ArrayList<String> missingItems = new ArrayList<>();
 		for (ItemEntity item : userCart) {
 			if (!items.contains(item)) {
-
 				missingItems.add(item.getName());
 			}
-
 		}
-
 		if (!missingItems.isEmpty()) {
-			redirectAttributes.addFlashAttribute("message",
-					"Missing " + (missingItems.size()) + " items, they are " + missingItems.toString());
+			redirectAttributes.addFlashAttribute("message", name + " is Missing " + missingItems.toString());
 		} else {
-			redirectAttributes.addFlashAttribute("message", "No Items Missing");
+			redirectAttributes.addFlashAttribute("message", name + " Has No Items Missing");
 		}
 		return "redirect:/total";
 	}

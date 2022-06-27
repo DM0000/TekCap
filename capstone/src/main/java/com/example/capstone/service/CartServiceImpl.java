@@ -14,49 +14,43 @@ import com.example.capstone.entity.ItemEntity;
 import com.example.capstone.repository.CartRepository;
 
 @Service
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
 
-@Autowired
-CartRepository cartRepository;
-	
-	
-  public void save(CartEntity cart) {
-	  cartRepository.save(cart);
-  }
-  
-  public void removeItemChk(CartEntity CART,CartItem cItem) {
-	
-		  if(cItem.getQuantity()<=0) {
-			  CART.getItems().remove(cItem);
-			  cartRepository.save(CART);
-		  } 
-	  
-	  }
-  
-  public CartItem findCartItem(CartEntity cart, ItemEntity item){
-	 CartItem tempCItem = null;
-	  for(CartItem cItem:cart.getItems()) {
-		  if(cItem.getItem()==item) {
-			  tempCItem=cItem;
-		  }
-	  }
-	  return tempCItem;
-  }
-  
-  
-  
-  
-public List<ItemEntity> cartToItems(CartEntity cart){
-	List<ItemEntity>iList=new ArrayList<ItemEntity>();
-			for(CartItem cItem: cart.getItems()){
-				if(cItem.getQuantity()>0)
-				iList.add(cItem.getItem());
+	@Autowired
+	CartRepository cartRepository;
+
+	public void save(CartEntity cart) {
+		cartRepository.save(cart);
+	}
+
+	public void removeItemChk(CartEntity CART, CartItem cItem) {
+
+		if (cItem.getQuantity() <= 0) {
+			CART.getItems().remove(cItem);
+			cartRepository.save(CART);
+		}
+
+	}
+
+	public CartItem findCartItem(CartEntity cart, ItemEntity item) {
+		CartItem tempCItem = null;
+		for (CartItem cItem : cart.getItems()) {
+			if (cItem.getItem() == item) {
+				tempCItem = cItem;
 			}
-	
-	
-	
-	return iList;
-	
-}
-  
+		}
+		return tempCItem;
+	}
+
+	public List<ItemEntity> cartToItems(CartEntity cart) {
+		List<ItemEntity> iList = new ArrayList<ItemEntity>();
+		for (CartItem cItem : cart.getItems()) {
+			if (cItem.getQuantity() > 0)
+				iList.add(cItem.getItem());
+		}
+
+		return iList;
+
+	}
+
 }
