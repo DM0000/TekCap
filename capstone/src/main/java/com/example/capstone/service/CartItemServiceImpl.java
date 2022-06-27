@@ -1,5 +1,7 @@
 package com.example.capstone.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +26,20 @@ public class CartItemServiceImpl {
 		
 		
 		public void remove(CartItem cItem) {
-			cItem.setQuantity(cItem.getQuantity()-1);
-			cartItemRepository.save(cItem);
+			if (cItem.getQuantity()>0) {
+				cItem.setQuantity(cItem.getQuantity()-1);
+				cartItemRepository.save(cItem);
+			}
+			
 		}
+		
+		public List<CartItem>findAll(){
+			return cartItemRepository.findAll();	
+			}
+		
+	
+		
+			
 		
 		
 }

@@ -17,7 +17,7 @@ public class CartItem {
 
 	private Integer quantity = 0;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private ItemEntity item;
 
 	public CartItem() {

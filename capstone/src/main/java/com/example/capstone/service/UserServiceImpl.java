@@ -151,28 +151,7 @@ public class UserServiceImpl implements UserService {
 	   userRepository.save(user);
    }
    
-   	
-//   public void addToCart(ItemEntity item, String email) {
-//	  UserEntity userT= userRepository.findByEmail(email);
-//	      CartEntity userCart = userT.getCart();
-//	      
-//	        CartItem cItem=new CartItem();
-//	     cItem.setItem(item);
-//	    if(userCart.getItems()==null) {
-//	    	userCart=new CartEntity();
-//	    	userT.setCart(userCart);
-//	    	userRepository.save(userT);
-//	    }
-//		if(userCart.getItems().contains(cItem)) {
-//			cItem.setQuantity(cItem.getQuantity()+1);
-//			userRepository.save(userT);
-//		}
-//		else {
-//			
-//			userCart.getItems().add(cItem);
-//			userRepository.save(userT);
-//		}
-//   }
+   
 		
 		public void removeFromCart(ItemEntity item, String email) {
 			  UserEntity userT= userRepository.findByEmail(email);

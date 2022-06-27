@@ -10,7 +10,7 @@
 <title>List Display</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" />
-
+<link rel="stylesheet" href="css/list.css"/>
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -20,8 +20,8 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a th:href="@{/}">Home</a></li>
-				<li class="active"><a th:href="@{/list}">Your List</a></li>
-				<li><a th:href="@{/total}">Compare</a></li>
+				<li ><a th:href="@{/list}">Your List</a></li>
+				<li class="active"><a th:href="@{/total}">Compare</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span
@@ -29,53 +29,53 @@
 			</ul>
 		</div>
 	</nav>
-	<form th:action="@{/total}" th:object="${item}" method="post">
+	<br>
+	<br>
+	<br>
+	<br>
 
 
-
-
-
-		<h2>Products</h2>
-
-		<!--    <th>Role</th>-->
-
-
-
-
+		<h2 class="text-center">Compare and Save</h2>
+<br>
+<br>
 		<div th:if="${#lists.isEmpty(items)}">
-			<span class="text-center">No Items found</span>
+			<h3 class="text-center align-middle">Your List Is Empty</h3>
 		</div>
-		<div th:each="item : ${items}" class=container>
-			<div class="btn btn-primary d-inline"
-				th:href="'/list1/' + ${item.name}" th:text="${item.name}"></div>
-
+		<div th:each="item : ${items}" >
+			<div class="col-md-4 align-middle text-center"> 
+			<div class="btn btn-info" th:text="${item.name}"><div>
+			</div>
+			</div>
+		</div>
 		</div>
 
-	</form>
 
-	<form th:action="@{/total}" th:object="${storetotal}" method="post">
-		<table class="table table-striped table-bordered ">
+
+
+		<table class="table  table-bordered ">
 			<tr>
 
-				<th>Store name</th>
-				<th>Total Price</th>
-				<th>Missing items</th>
+				<th class="align-middle text-center" >Store Name</th>
+				<th class="align-middle text-center" >Total Price</th>
+				<th class="align-middle text-center" >Missing Items</th>
 			</tr>
 
-			<tr th:each="store : ${storetotal}">
+				<tr th:each="store : ${storetotal}">
 
-				<td class="align-middle" th:text="${store.key}"></td>
+					<td class="align-middle text-center"><div  class="btn btn-success" th:text="${store.key}" ></div></td>
 
-				<td class="align-middle" th:text="${store.value}"></td>
-				<td class="align-middle"><a class="btn btn-secondary"
+				<td class="align-middle text-center" th:text="${store.value}"></td>
+				<td class="align-middle text-center"><a class="btn btn-info"
 					th:href="'/invchk/' + ${store.key}">What's Missing?</a></td>
 				<!--     <td class="align-middle"  th:text="${@total(store.id)}"></td>  -->
 
 			</tr>
 		</table>
-	</form>
+	
 	<p th:if="${message}" th:text="${message}"
 		class="alert alert-success text-center"></p>
+
+
 
 
 </body>

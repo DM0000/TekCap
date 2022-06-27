@@ -3,6 +3,7 @@ package com.example.capstone.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,19 +24,32 @@ CartRepository cartRepository;
 	  cartRepository.save(cart);
   }
   
-  public void removeItemChk( CartEntity cart) {
+  public void removeItemChk(CartEntity CART,CartItem cItem) {
+	
+		  if(cItem.getQuantity()<=0) {
+			  CART.getItems().remove(cItem);
+			  cartRepository.save(CART);
+		  } 
+	  
+	  }
+  
+  public CartItem findCartItem(CartEntity cart, ItemEntity item){
+	 CartItem tempCItem = null;
 	  for(CartItem cItem:cart.getItems()) {
-	  if(cItem.getQuantity()<=0) {
-		  cart.getItems().remove(cItem);
-		 cartRepository.save(cart);
+		  if(cItem.getItem()==item) {
+			  tempCItem=cItem;
+		  }
 	  }
-	  }
+	  return tempCItem;
   }
+  
+  
   
   
 public List<ItemEntity> cartToItems(CartEntity cart){
 	List<ItemEntity>iList=new ArrayList<ItemEntity>();
 			for(CartItem cItem: cart.getItems()){
+				if(cItem.getQuantity()>0)
 				iList.add(cItem.getItem());
 			}
 	

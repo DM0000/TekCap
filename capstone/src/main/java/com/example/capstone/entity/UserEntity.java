@@ -29,7 +29,7 @@ public class UserEntity {
 	
 	private String email;
 
-	@OneToOne
+	@OneToOne(orphanRemoval = true,cascade = CascadeType.REMOVE)
 	private CartEntity cart;
 	
 	private String password;

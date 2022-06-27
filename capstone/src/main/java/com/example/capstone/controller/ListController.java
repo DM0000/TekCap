@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.capstone.entity.CartEntity;
 import com.example.capstone.entity.CartItem;
 import com.example.capstone.entity.ItemEntity;
+import com.example.capstone.entity.StoreInvEntity;
 import com.example.capstone.entity.UserEntity;
 import com.example.capstone.service.CartItemServiceImpl;
 import com.example.capstone.service.CartServiceImpl;
@@ -38,11 +39,30 @@ public class ListController {
 
 	// get all items and list
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
-	public String getItems(Model model) {
-		List<ItemEntity> items = itemServiceImpl.findAllItems();
-		model.addAttribute("items", items);
-//		model.addAttribute("userInfo", new UserEntity());
+	public String getItems(Model model, Authentication authentication) {
+		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
 
+		if (userT.getCart() == null) {
+			CartEntity cart = new CartEntity();
+			userT.setCart(cart);
+			cartServiceImpl.save(cart);
+			userServiceImpl.saveUser(userT);
+		}
+		List<CartItem> cItems = userT.getCart().getItems();
+		List<CartItem> allCartItems = cartItemServiceImpl.findAll();
+		List<ItemEntity> items = itemServiceImpl.findAllItems();
+
+		for (CartItem item : cItems) {
+			if (allCartItems.contains(item)) {
+				allCartItems.add(item);
+			}
+
+		}
+
+		model.addAttribute("items", items);
+		model.addAttribute("cItems", cItems);
+//		model.addAttribute("userInfo", new UserEntity());
+//		model.addAttribute("cItems", cItems);
 		return "list";
 	}
 
@@ -52,13 +72,6 @@ public class ListController {
 		ItemEntity item = itemServiceImpl.findById(id).orElseThrow();
 		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
 		CartEntity userCart = userT.getCart();
-		if (userCart == null) {
-
-			userCart = new CartEntity();
-			cartServiceImpl.save(userCart);
-			userT.setCart(userCart);
-			userServiceImpl.saveUser(userT);
-		}
 
 		CartItem tempCartItem = new CartItem(item);
 		for (CartItem c : userCart.getItems()) {
@@ -82,45 +95,47 @@ public class ListController {
 		return "redirect:/list";
 	}
 
-	@GetMapping("/reset")
-	public String reset(RedirectAttributes redirectAttributes, Authentication authentication) {
-		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
-		
-		userT.getCart().getItems().clear();
-		cartServiceImpl.save(userT.getCart());
-		redirectAttributes.addFlashAttribute("message", "List Reset");
-		return "redirect:/list";
-	}
-
 	@GetMapping("/list1/{id}")
 	public String removeItem(@PathVariable("id") Long id, RedirectAttributes redirectAttributes,
 			Authentication authentication) {
 		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
-		ItemEntity ritem = itemServiceImpl.findById(id).orElseThrow();
+		ItemEntity rItem = itemServiceImpl.findById(id).orElseThrow();
 		CartEntity userCart = userT.getCart();
-		CartItem tempCartItem = new CartItem(ritem);
-		System.err.println("tried to remove");
-		for (CartItem c : userCart.getItems()) {
-			if (c.getItem() == ritem) {
-				tempCartItem = c;
-			}
-		System.err.println(tempCartItem.getItem().getName());
-		System.err.println("usercart"+userCart);
-		System.out.println("usercart's list"+userCart.getItems());
-		if (userCart.getItems()== null||!userCart.getItems().contains(tempCartItem)){
-			redirectAttributes.addFlashAttribute("message", tempCartItem.getItem().getName()+" Are Not In Cart");
-		} else {
-
-	             cartItemServiceImpl.remove(tempCartItem);
-	    //breaks code need to fix loop
-//				cartServiceImpl.removeItemChk(userCart);
-					redirectAttributes.addFlashAttribute("message",  " removed!");
 	
+		System.err.println("tried to remove");
+		
+	
+		CartItem tempCartItem=cartServiceImpl.findCartItem(userCart, rItem);
+	
+		
+			System.err.println("usercart" + userCart);
+			System.out.println("usercart's list" + userCart.getItems());
+			if (!userCart.getItems().contains(tempCartItem)|| !userCart.getItems().contains(tempCartItem)) {
+				redirectAttributes.addFlashAttribute("message", rItem.getName()+ " Are Not In Cart");
+			} else {
+				System.err.println("first" + tempCartItem.getItem().getName());
+				cartItemServiceImpl.remove(tempCartItem);
+				System.err.println("second" + tempCartItem.getItem().getName());
+				cartServiceImpl.removeItemChk(userCart, tempCartItem);
+				
+
+				redirectAttributes.addFlashAttribute("message",rItem.getName()+ " removed!");
 
 			}
 
-		}
 		
+
+	return"redirect:/list";
+
+	}
+
+	@GetMapping("/reset")
+	public String reset(RedirectAttributes redirectAttributes, Authentication authentication) {
+		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
+
+		userT.getCart().getItems().clear();
+		cartServiceImpl.save(userT.getCart());
+		redirectAttributes.addFlashAttribute("message", "List Reset");
 		return "redirect:/list";
 	}
 
