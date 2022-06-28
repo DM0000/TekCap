@@ -34,7 +34,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 					"/webjars/**"
 					
 					).permitAll()
-	//	trying to check permissions			 .antMatchers("/list**","/total").hasRole("User")
 					.anyRequest().authenticated()
 					.and()
 					.formLogin()
