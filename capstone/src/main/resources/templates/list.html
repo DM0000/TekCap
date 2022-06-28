@@ -58,8 +58,8 @@
 					
 <!-- 					</td> -->
 					<td class="align-middle text-center"><a
-						class="btn btn-success" th:href="'/list/' + ${item.id}">add</a> <a
-						class="btn btn-warning" th:href="'/list1/' + ${item.id}">remove</a></td>
+						class="btn btn-success" th:href="'/list/' + ${item.id}">Add</a> <a
+						class="btn btn-warning" th:href="'/list1/' + ${item.id}">Remove</a></td>
 				</tr>
 			</table>
 		</div>
@@ -74,8 +74,7 @@
 					<th class="align-middle text-center ctitle ">Quantity</th>
 
 				</tr>
-				<tr th:if="${#lists.isEmpty(cItems)}">
-					<td class="text-center" colspan="7">No Items found</td>
+				<tr th:if="${#lists.isEmpty(cItems)}"><td class="align-middle text-center">Your Cart is Empty</td>
 				</tr>
 				<tr th:each="item : ${cItems}">
 					<td class="align-middle text-center" th:text="${item.item.name}"></td>

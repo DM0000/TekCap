@@ -1,11 +1,12 @@
 body{
     background-image:url("https://images.unsplash.com/photo-1578916171728-46686eac8d58?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmV0YWlsJTIwc3RvcmV8ZW58MHx8MHx8&w=1000&q=80");
-   background-size:cover
+   background-size:cover;
+   opacity:.9;
   }
   
   
     h1{
-    margin-top: 30px;
+    margin-top: 40px;
     font-size: 500%;
        
 }

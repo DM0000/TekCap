@@ -41,7 +41,7 @@ public class ListController {
 	@RequestMapping(path = "/list", method = RequestMethod.GET)
 	public String getItems(Model model, Authentication authentication) {
 		UserEntity userT = userServiceImpl.findByEmail(authentication.getName());
-      System.out.println(userT.getName()+" is checking cart");
+      System.out.println("Someone is checking cart");
 		if (userT.getCart() == null) {
 			CartEntity cart = new CartEntity();
 			userT.setCart(cart);
@@ -105,7 +105,7 @@ public class ListController {
 		
 		
 			if (!userCart.getItems().contains(tempCartItem)|| !userCart.getItems().contains(tempCartItem)) {
-				redirectAttributes.addFlashAttribute("message", rItem.getName()+ " Are Not In Cart");
+				redirectAttributes.addFlashAttribute("message", "No "+rItem.getName()+ " In Cart");
 			} else {
 			
 				cartItemServiceImpl.remove(tempCartItem);
