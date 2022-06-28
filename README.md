@@ -2,7 +2,7 @@
 Teksystem Capstone
 StoreChecker
 
-StoreChecker application that checks allows users to search multiple stores for items on thier list to find the best prices.
+StoreChecker application that checks allows users to search multiple stores for items on their list to find the best prices.
 
 Each user has an unique cart that is saved with the user.
 
