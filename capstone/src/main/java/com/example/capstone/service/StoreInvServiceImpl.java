@@ -63,13 +63,14 @@ public class StoreInvServiceImpl implements StoreInvService {
 		List<CartItem> cList = cart.getItems();
 
 		HashMap<String, String> storesTotal = new HashMap<String, String>();
-		Double sum = 0.;
+		Double sum;
 		// iterate through each stores inventory
 		for (String key : storeList.keySet()) {
 			storesTotal.put(key, "No Items Available");
 			// check each item in inventory
+			sum=0.;
 			for (StoreInvEntity sItem : storeList.get(key)) {
-
+				
 				// check each cart item against store inventory
 				for (CartItem cItem : cList) {
 					if (cItem.getItem() == sItem.getItem()) {
