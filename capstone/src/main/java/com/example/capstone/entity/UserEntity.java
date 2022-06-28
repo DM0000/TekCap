@@ -1,5 +1,7 @@
 package com.example.capstone.entity;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -42,6 +44,8 @@ public class UserEntity {
 	(targetEntity = Role.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Collection<Role> roles;
 
+	private final LocalDate startDate= LocalDate.now();
+	
 	
 	public UserEntity() {
 	}
@@ -75,6 +79,10 @@ public class UserEntity {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public LocalDate getStartDate() {
+		return startDate;
 	}
 
 	public String getPassword() {
